@@ -14,37 +14,38 @@ git clone https://github.com/rapid7/metasploit-framework.git
 
 cd metasploit-framework
 
-sudo $INSTALLER install -y build-essential zlib1g zlib1g-dev/
-libxml2 libxml2-dev libxslt-dev locate/
-libreadline6-dev libcurl4-openssl-dev git-core/
-libssl-dev libyaml-dev openssl autoconf libtool/
-ncurses-dev bison curl wget xsel postgresql/
-postgresql-contrib libpq-dev libapr1 libaprutil1 libsvn1/
+sudo $INSTALLER install -y build-essential zlib1g zlib1g-dev /
+libxml2 libxml2-dev libxslt-dev locate /
+libreadline6-dev libcurl4-openssl-dev git-core /
+libssl-dev libyaml-dev openssl autoconf libtool /
+ncurses-dev bison curl wget xsel postgresql /
+postgresql-contrib libpq-dev libapr1 libaprutil1 libsvn1 /
 libpcap-dev libsqlite3-dev libgmp3-dev
 
 sudo $INSTALLER install -y ruby ruby-dev #ruby2.3-dev ruby2.3
 sudo gem install bundler
 
 bundle install
-sudo chmod +r /var/lib/gems/2.2.0/gems/robots-0.10.1/lib/robots.rb
+
+#gems version
+
+GEMS_VER="2.1.0"
+
+#some file that needs permissions
+sudo chmod +r "/var/lib/gems/$GEMS_VER/gems/robots-0.10.1/lib/robots.rb"
 
 echo "Matasploit is installed. Now to set up the database"
 
 #set up the database from base install
+sudo systemctl enable postgresql
 sudo systemctl start postgresql
 
 #postgres version in form x.y for folder paths
 PG_VER=`psql --version | awk '{print $3}' | cut -d. -f1,2`
 echo "Found postgres version: $PG_VER"
 
-
-#for fedora only-----
-#PG_DATA_DIR="/var/lib/pgsql"
-#sudo mkdir -p "$PG_DATA_DIR/data/"
-#sudo chown -R postgres:postgres "$PG_DATA_DIR"
-#--------
-
 #====== These values may be modified if desired ========
+
 #metasploit paramaters
 #db user
 MSF_USER="msf"
@@ -70,9 +71,6 @@ HBA_FILE="$CONF_DIR/pg_hba.conf"
 PG_CONF="$CONF_DIR/postgresql.conf"
 
 #====== Dont modify anything else =========
-
-
-#sudo -u postgres -c "/usr/lib/postgresql/$PG_VER/bin/initdb -D $PG_DATA_DIR"
 
 #create msf user, db and change password to the randomly generated one
 #configure postgres to listen on localhost
