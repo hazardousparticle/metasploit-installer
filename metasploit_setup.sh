@@ -29,12 +29,12 @@ bundle install
 
 #gems version
 
-GEMS_VER="2.1.0"
+GEMS_VER=`gem -v`
 
 #some file that needs permissions
-sudo chmod +r "/var/lib/gems/$GEMS_VER/gems/robots-0.10.1/lib/robots.rb"
+sudo chmod +r "/var/lib/gems/2.1.0/gems/robots-0.10.1/lib/robots.rb"
 
-echo "Matasploit is installed. Now to set up the database"
+echo "Metasploit is installed. Now to set up the database"
 
 #set up the database from base install
 sudo systemctl enable postgresql
