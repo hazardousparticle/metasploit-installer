@@ -14,12 +14,12 @@ git clone https://github.com/rapid7/metasploit-framework.git
 
 cd metasploit-framework
 
-sudo $INSTALLER install -y build-essential zlib1g zlib1g-dev /
-libxml2 libxml2-dev libxslt-dev locate /
-libreadline6-dev libcurl4-openssl-dev git-core /
-libssl-dev libyaml-dev openssl autoconf libtool /
-ncurses-dev bison curl wget xsel postgresql /
-postgresql-contrib libpq-dev libapr1 libaprutil1 libsvn1 /
+sudo $INSTALLER install -y build-essential zlib1g zlib1g-dev \
+libxml2 libxml2-dev libxslt-dev locate \
+libreadline6-dev libcurl4-openssl-dev git-core \
+libssl-dev libyaml-dev openssl autoconf libtool \
+ncurses-dev bison curl wget xsel postgresql \
+postgresql-contrib libpq-dev libapr1 libaprutil1 libsvn1 \
 libpcap-dev libsqlite3-dev libgmp3-dev
 
 sudo $INSTALLER install -y ruby ruby-dev #ruby2.3-dev ruby2.3
@@ -29,7 +29,7 @@ bundle install
 
 #gems version
 
-GEMS_VER=`gem -v`
+GEMS_VER=$(gem -v)
 
 #some file that needs permissions
 sudo chmod +r "/var/lib/gems/2.1.0/gems/robots-0.10.1/lib/robots.rb"
