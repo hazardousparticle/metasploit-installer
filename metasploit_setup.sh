@@ -1,8 +1,7 @@
 #! /bin/bash
 set -e
 
-
-#metasploit installer
+# Metasploit installer
 
 #fedora packager:
 #INSTALLER="dnf"
@@ -28,11 +27,10 @@ sudo gem install bundler
 bundle install
 
 #gems version
+#GEMS_VER=$(gem -v)
 
-GEMS_VER=$(gem -v)
-
-#some file that needs permissions
-sudo chmod +r "/var/lib/gems/2.1.0/gems/robots-0.10.1/lib/robots.rb"
+# Fix some files that needs permissions
+find "/var/lib/gems" -iname "robots.rb" | xargs sudo chmod +r
 
 echo "Metasploit is installed. Now to set up the database"
 
